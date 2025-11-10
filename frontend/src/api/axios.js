@@ -2,7 +2,10 @@ import axios from 'axios';
 import { redirect } from 'react-router-dom';
 
 const API = axios.create({
-  baseURL: 'http://localhost:5000/api/v1',
+  baseURL:
+    import.meta.env.VITE_NODE_ENV === 'development'
+      ? 'http://localhost:5000/api/v1'
+      : import.meta.env.VITE_BACKEND_URL,
 });
 
 API.interceptors.request.use((config) => {
