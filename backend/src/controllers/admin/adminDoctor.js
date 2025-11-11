@@ -84,14 +84,12 @@ export const editDoctor = async (req, res) => {
     const { id } = req.params;
     const updates = req.body;
 
-    // Extract User fields
     const userFields = ["name", "email"];
     const userUpdates = {};
     userFields.forEach((field) => {
       if (updates[field]) userUpdates[field] = updates[field];
     });
 
-    // Extract Doctor fields
     const doctorFields = [
       "specialization",
       "experience",
@@ -107,7 +105,6 @@ export const editDoctor = async (req, res) => {
       if (updates[field]) doctorUpdates[field] = updates[field];
     });
 
-    // ✅ Handle Schedule separately
     if (
       updates.day &&
       updates.from &&
@@ -124,12 +121,10 @@ export const editDoctor = async (req, res) => {
       ];
     }
 
-    // ✅ Update User (only if needed)
     if (Object.keys(userUpdates).length > 0) {
       await User.findByIdAndUpdate(id, userUpdates);
     }
 
-    // ✅ Update Doctor data (no need for `{ new: true }` since we fetch next)
     const doctorExists = await Doctor.findByIdAndUpdate(id, doctorUpdates);
     if (!doctorExists) {
       return res
@@ -137,7 +132,6 @@ export const editDoctor = async (req, res) => {
         .json({ success: false, message: "Doctor not found" });
     }
 
-    // ✅ Now populate the fresh updated data
     const populatedDoctor = await Doctor.findById(id).populate(
       "_id",
       "name email"
@@ -160,16 +154,14 @@ export const editDoctor = async (req, res) => {
 
 export const deleteDoctor = async (req, res) => {
   try {
-    const { id } = req.params; // doctorId
+    const { id } = req.params;
 
-    // Remove doctor record
     const doctor = await Doctor.findByIdAndDelete(id);
     if (!doctor)
       return res
         .status(404)
         .json({ success: false, message: "Doctor not found" });
 
-    // Remove linked user account
     await User.findByIdAndDelete(id);
 
     res

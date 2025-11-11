@@ -1,4 +1,3 @@
-// NODE MODULES...
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
@@ -13,7 +12,6 @@ const dbOptions = {
   connectTimeoutMS: 30000,
 };
 
-// ESTABLISHES A CONNECTION TO THE MONGOdB DATABASE TO THE MONGOOSE...
 export const connectToDatabase = async () => {
   try {
     if (!MONGODB_URI) {
@@ -29,7 +27,6 @@ export const connectToDatabase = async () => {
   }
 };
 
-// DISCONNECTS FROM THE MONGODB DATABASE USING MONGOOSE...
 export const disconnectFromDatabase = async () => {
   try {
     await mongoose.disconnect();

@@ -1,7 +1,5 @@
-// NODE MODULES...
 import { Router } from "express";
 
-// ADMIN CONTORLLER...
 import getAdminOverview from "../controllers/admin/adminOverview.js";
 import {
   addDoctor,
@@ -18,7 +16,6 @@ import {
 
 import { getAllPatients } from "../controllers/admin/getAdminPatient.js";
 
-// MIDDLEWARES...
 import authentication from "../middlewares/authentication.js";
 import authorization from "../middlewares/authorization.js";
 

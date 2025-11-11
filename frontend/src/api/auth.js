@@ -1,4 +1,3 @@
-// src/api/auth.js
 import API from './axios';
 
 export async function registerUser(formData) {

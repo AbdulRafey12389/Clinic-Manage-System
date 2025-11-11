@@ -1,7 +1,4 @@
-// controllers/appointment.controller.js
 import Appointment from "../../models/appointment.js";
-// import Doctor from "../../models/doctor.js";
-// import Room from "../";
 
 const getMyAppointments = async (req, res) => {
   try {
@@ -18,11 +15,8 @@ const getMyAppointments = async (req, res) => {
       })
       .sort({ date: -1, createdAt: -1 });
 
-
-    // Calculate today's date (only YYYY-MM-DD)
     const today = new Date().toISOString().split("T")[0];
 
-    // Filter categories and map isToday
     const waiting = appointments
       .filter((a) => a.status === "Pending")
       .map((a) => ({

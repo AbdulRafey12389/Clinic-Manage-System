@@ -27,14 +27,12 @@ export const updateProfile = async (req, res) => {
     if (gender) updates.gender = gender;
     if (imageUrl) updates.imageUrl = imageUrl;
 
-    // ✅ Update user in DB
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       { $set: updates },
       { new: true, runValidators: true }
     ).select("-password -refreshToken");
 
-    // ✅ Handle user not found
     if (!updatedUser) {
       return res.status(404).json({ message: "User not found" });
     }

@@ -5,7 +5,6 @@ import { Label } from '@/components/ui/label';
 import { UserRound } from 'lucide-react';
 
 export default function DoctorProfile({ doctor }) {
-  // Example doctor data if not passed as prop
   const data = doctor || {
     name: 'Dr. Sarah Khan',
     email: 'sarah.khan@example.com',
@@ -26,7 +25,6 @@ export default function DoctorProfile({ doctor }) {
 
       <Card className='p-6 rounded-2xl bg-[#101614] border border-emerald-500/10 shadow-[0_0_15px_rgba(16,185,129,0.05)]'>
         <div className='flex flex-col items-center gap-4'>
-          {/* Profile Picture */}
           {data.profilePic ? (
             <img
               src={data.profilePic}
@@ -42,7 +40,6 @@ export default function DoctorProfile({ doctor }) {
           <h2 className='text-xl font-medium text-white'>{data.name}</h2>
         </div>
 
-        {/* Doctor Info */}
         <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mt-6'>
           <div>
             <Label className='text-gray-400'>Email</Label>

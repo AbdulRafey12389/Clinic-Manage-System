@@ -4,8 +4,14 @@ import Appointment from "../../models/appointment.js";
 export const createCaseHistory = async (req, res) => {
   try {
     const doctorId = req.user._id;
-    const { appointmentId, doctorName, diagnosis, prescription, followUp, aiSummary } =
-      req.body;
+    const {
+      appointmentId,
+      doctorName,
+      diagnosis,
+      prescription,
+      followUp,
+      aiSummary,
+    } = req.body;
 
     const appointment = await Appointment.findOne({
       _id: appointmentId,
@@ -23,6 +29,7 @@ export const createCaseHistory = async (req, res) => {
 
     const existingCase = await CaseHistory.findOne({
       patient: appointment.patient._id,
+      doctor: doctorId,
     });
 
     if (existingCase) {

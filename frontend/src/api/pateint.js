@@ -1,4 +1,3 @@
-// src/api/patient.js
 import API from './axios';
 
 export async function getPatientOverview() {
@@ -75,7 +74,7 @@ export async function getMyCaseHistory() {
 export async function downloadCaseHistoryPdf(id) {
   try {
     const response = await API.get(`/patient/download-pdf/${id}`, {
-      responseType: 'blob', // important!
+      responseType: 'blob',
     });
     return response;
   } catch (error) {
@@ -91,6 +90,16 @@ export async function updateProfile(formData) {
         'Content-Type': 'multipart/form-data',
       },
     });
+    return response;
+  } catch (error) {
+    console.error('Download PDF API error:', error);
+    throw new Error(error.response?.data?.message || 'Failed to download PDF');
+  }
+}
+
+export async function updateCancelAppointment(id) {
+  try {
+    const response = await API.patch(`/patient/cancel-appointment/${id}`);
     return response;
   } catch (error) {
     console.error('Download PDF API error:', error);

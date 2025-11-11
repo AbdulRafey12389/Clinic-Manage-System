@@ -8,14 +8,12 @@ import { getPatientOverview } from '@/api/pateint';
 export default function Home() {
   const navigate = useNavigate();
 
-  // ---------- STATE ----------
   const [loading, setLoading] = useState(true);
   const [chartData, setChartData] = useState([]);
   const [pendingAppointments, setPendingAppointments] = useState([]);
   const [completedAppointments, setCompletedAppointments] = useState([]);
   const [recentCaseHistory, setRecentCaseHistory] = useState([]);
 
-  // ---------- FETCH OVERVIEW DATA ----------
   useEffect(() => {
     const fetchOverview = async () => {
       try {
@@ -54,7 +52,6 @@ export default function Home() {
 
   return (
     <div className='space-y-10'>
-      {/* ---------- Chart Section ---------- */}
       <div className='bg-[#101614] rounded-2xl p-6 border border-emerald-500/10 shadow-[0_0_15px_rgba(16,185,129,0.05)]'>
         <h2 className='text-2xl font-semibold mb-4 text-white'>
           Health Visits Overview (This Month)
@@ -62,7 +59,6 @@ export default function Home() {
         <VisitsChart data={chartData} />
       </div>
 
-      {/* ---------- Pending Appointments ---------- */}
       <div className='bg-[#101614] rounded-2xl p-6 border border-emerald-500/10 shadow-[0_0_10px_rgba(16,185,129,0.05)]'>
         <h2 className='text-xl font-semibold text-white mb-2'>
           Pending Appointments
@@ -88,7 +84,6 @@ export default function Home() {
         )}
       </div>
 
-      {/* ---------- Completed Appointments ---------- */}
       <div className='bg-[#101614] rounded-2xl p-6 border border-emerald-500/10 shadow-[0_0_10px_rgba(16,185,129,0.05)]'>
         <h2 className='text-xl font-semibold text-white mb-2'>
           Completed Appointments
@@ -114,7 +109,6 @@ export default function Home() {
         )}
       </div>
 
-      {/* ---------- Case History ---------- */}
       <div className='bg-[#101614] rounded-2xl p-6 border border-emerald-500/10 shadow-[0_0_10px_rgba(16,185,129,0.05)]'>
         <div className='flex items-center justify-between mb-4'>
           <div>

@@ -14,13 +14,12 @@ export const bookAppoinment = async (req, res) => {
       doctorName,
       date,
       timeSlot,
-      room, // room ID from frontend
+      room,
       reason,
     } = req.body;
 
     console.log(req.body);
 
-    // 🧾 Validation
     if (!patient || !doctor || !date || !timeSlot) {
       return res.status(400).json({
         success: false,
@@ -28,7 +27,6 @@ export const bookAppoinment = async (req, res) => {
       });
     }
 
-    // 1️⃣ Check if slot already booked
     const existingAppointment = await Appointment.findOne({
       doctor,
       date,
@@ -43,7 +41,6 @@ export const bookAppoinment = async (req, res) => {
       });
     }
 
-    // 2️⃣ Create new appointment
     const newAppointment = await Appointment.create(
       [
         {
@@ -60,7 +57,6 @@ export const bookAppoinment = async (req, res) => {
       { session }
     );
 
-    // 3️⃣ If room is provided → mark it Occupied
     if (room) {
       const updatedRoom = await Room.findByIdAndUpdate(
         room,
@@ -73,11 +69,9 @@ export const bookAppoinment = async (req, res) => {
       }
     }
 
-    // ✅ 4️⃣ Commit Transaction
     await session.commitTransaction();
     session.endSession();
 
-    // 🟢 5️⃣ Response
     res.status(201).json({
       success: true,
       message: "Appointment created successfully",

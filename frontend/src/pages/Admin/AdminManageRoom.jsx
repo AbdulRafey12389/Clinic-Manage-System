@@ -32,7 +32,6 @@ const ManageRooms = () => {
     status: 'Available',
   });
 
-  // ✅ Fetch rooms
   useEffect(() => {
     (async () => {
       try {
@@ -44,7 +43,6 @@ const ManageRooms = () => {
     })();
   }, []);
 
-  // ✅ Add / Update Room
   const handleSubmit = async () => {
     if (!form.roomNumber || !form.type || !form.capacity) {
       toast.error('Please fill all required fields');
@@ -80,7 +78,6 @@ const ManageRooms = () => {
     }
   };
 
-  // ✅ Edit Room — prefill form
   const handleEdit = (room) => {
     setIsEditing(true);
     setEditId(room._id);
@@ -93,7 +90,6 @@ const ManageRooms = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // ✅ Delete Room
   const handleDelete = async (id) => {
     try {
       if (window.confirm('Are you sure you want to delete this room?')) {
@@ -107,7 +103,6 @@ const ManageRooms = () => {
     }
   };
 
-  // ✅ Filter Rooms by search
   const filteredRooms = rooms.filter(
     (r) =>
       r.roomNumber.toLowerCase().includes(search.toLowerCase()) ||
@@ -116,7 +111,6 @@ const ManageRooms = () => {
 
   return (
     <div className='space-y-8'>
-      {/* ---------- Header ---------- */}
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
@@ -131,7 +125,6 @@ const ManageRooms = () => {
         </p>
       </motion.div>
 
-      {/* ---------- Add / Edit Room Form ---------- */}
       <Card className='p-6 bg-[#101614] border border-emerald-500/10 rounded-2xl space-y-5'>
         <h2 className='text-lg font-semibold text-white flex items-center gap-2'>
           <PlusCircle
@@ -149,7 +142,6 @@ const ManageRooms = () => {
             className='bg-[#0b0f0e] border-emerald-500/10 text-white'
           />
 
-          {/* ✅ Changed to dropdown for room type */}
           <select
             value={form.type}
             onChange={(e) => setForm({ ...form, type: e.target.value })}
@@ -194,7 +186,6 @@ const ManageRooms = () => {
         </Button>
       </Card>
 
-      {/* ---------- Search ---------- */}
       <div className='flex items-center justify-between'>
         <div className='relative w-full md:w-1/3'>
           <Search
@@ -210,7 +201,6 @@ const ManageRooms = () => {
         </div>
       </div>
 
-      {/* ---------- Room List ---------- */}
       <div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-5'>
         {filteredRooms.map((room) => (
           <Card

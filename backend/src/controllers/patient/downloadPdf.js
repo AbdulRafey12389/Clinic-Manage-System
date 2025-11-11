@@ -1,20 +1,15 @@
 import CaseHistory from "../../models/caseHistory.js";
 import PDFDocument from "pdfkit";
 
-/**
- * Download case history PDF for a specific patient
- */
 export const downloadCaseHistoryPdf = async (req, res) => {
   try {
     const { historyId } = req.params;
     const patientId = req.user._id;
 
-    // Validate historyId
     if (!historyId) {
       return res.status(400).json({ message: "History ID is required" });
     }
 
-    // Fetch the case history for this patient
     const history = await CaseHistory.findOne({
       _id: historyId,
       patient: patientId,
@@ -89,7 +84,6 @@ export const downloadCaseHistoryPdf = async (req, res) => {
     doc.fontSize(12).fillColor("#000");
     doc.text(aiSummary).moveDown();
 
-    // FOOTER
     doc
       .moveDown()
       .fontSize(10)

@@ -18,7 +18,7 @@ export const checkTokenValidity = () => {
     }
 
     const decoded = jwtDecode(token);
-    const currentTime = Date.now() / 1000; // seconds me
+    const currentTime = Date.now() / 1000;
 
     if (decoded.exp && decoded.exp < currentTime) {
       localStorage.removeItem('token');

@@ -10,7 +10,6 @@ const generateAiSummary = async (req, res) => {
   try {
     const { diagnosis, doctorName } = req.body;
 
-    // ✅ Ensure both are strings
     if (!diagnosis || typeof diagnosis !== "string") {
       return res.status(400).json({ error: "Diagnosis must be a string!" });
     }

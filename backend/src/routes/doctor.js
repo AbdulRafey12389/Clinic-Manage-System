@@ -1,9 +1,7 @@
-// NODE MODULES...
 import { Router } from "express";
 
 const router = Router();
 
-// CONTROLLERS...
 import { getDoctorAppointments } from "../controllers/doctor/doctorAppoinment.js";
 import { getCompletedAppointments } from "../controllers/doctor/doctorCompletedAppointment.js";
 import generateAiSummary from "../controllers/doctor/generateAISummary.js";
@@ -12,7 +10,6 @@ import { getDoctorCaseHistories } from "../controllers/doctor/doctorGetCaseHisto
 import { getDoctorOverview } from "../controllers/doctor/doctorOverview.js";
 import { updateAppointmentStatus } from "../controllers/doctor/doctorUpdateAppoitmentSatus.js";
 
-// MIDDLEWARES...
 import authentication from "../middlewares/authentication.js";
 import authorization from "../middlewares/authorization.js";
 

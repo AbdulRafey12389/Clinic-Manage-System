@@ -44,7 +44,6 @@ const DoctorCaseRecords = () => {
     })();
   }, []);
 
-  // 🔹 Form state
   const [form, setForm] = useState({
     appointmentId: '',
     patient: '',
@@ -57,7 +56,6 @@ const DoctorCaseRecords = () => {
   const [aiSummary, setAiSummary] = useState('');
   const [records, setRecords] = useState([]);
 
-  // 🔹 Handle input change (main fix)
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -75,7 +73,6 @@ const DoctorCaseRecords = () => {
     }
   };
 
-  // 🔹 Save record
   const handleSave = async (e) => {
     e.preventDefault();
     if (!form.patient || !form.diagnosis) return;
@@ -143,7 +140,6 @@ const DoctorCaseRecords = () => {
 
   return (
     <div className='space-y-8'>
-      {/* ---------- Header ---------- */}
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
@@ -157,13 +153,11 @@ const DoctorCaseRecords = () => {
         </p>
       </motion.div>
 
-      {/* ---------- Case Record Form ---------- */}
       <Card className='p-6 bg-[#101614] border border-emerald-500/10 rounded-2xl space-y-5'>
         <form
           onSubmit={handleSave}
           className='grid md:grid-cols-2 gap-5 text-sm'
         >
-          {/* Patient */}
           <div className='md:col-span-2'>
             <label className='text-gray-400 flex items-center gap-2'>
               <UserRound size={16} /> Select Patient
@@ -186,7 +180,6 @@ const DoctorCaseRecords = () => {
             </select>
           </div>
 
-          {/* Diagnosis */}
           <div className='md:col-span-2'>
             <label className='text-gray-400 flex items-center gap-2'>
               <Stethoscope size={16} /> Diagnosis
@@ -201,7 +194,6 @@ const DoctorCaseRecords = () => {
             />
           </div>
 
-          {/* Prescription */}
           <div className='md:col-span-2'>
             <label className='text-gray-400 flex items-center gap-2'>
               <FileText size={16} /> Prescription
@@ -216,7 +208,6 @@ const DoctorCaseRecords = () => {
             />
           </div>
 
-          {/* Follow Up */}
           <div className='md:col-span-2'>
             <label className='text-gray-400'>Follow-up Date / Notes</label>
             <Input
@@ -229,7 +220,6 @@ const DoctorCaseRecords = () => {
             />
           </div>
 
-          {/* Buttons */}
           <div className='md:col-span-2 flex gap-3'>
             <Button
               type='button'
@@ -260,7 +250,6 @@ const DoctorCaseRecords = () => {
           </div>
         </form>
 
-        {/* ---------- AI Summary ---------- */}
         {aiSummary && (
           <div className='p-4 bg-[#0c120e] border border-emerald-500/20 rounded-xl text-sm text-gray-300 mt-2'>
             <strong className='text-emerald-400'>AI Suggestion:</strong>{' '}
@@ -269,7 +258,6 @@ const DoctorCaseRecords = () => {
         )}
       </Card>
 
-      {/* ---------- Case History Table ---------- */}
       <Card className='p-6 bg-[#101614] border border-emerald-500/10 rounded-2xl'>
         <h2 className='text-lg font-semibold mb-4 text-white'>
           Recent Case History

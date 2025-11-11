@@ -45,7 +45,6 @@ const ManageDoctors = () => {
     fees: '',
   });
 
-  // -------------------- FETCH ALL DOCTORS --------------------
   useEffect(() => {
     (async () => {
       try {
@@ -57,11 +56,9 @@ const ManageDoctors = () => {
     })();
   }, []);
 
-  // -------------------- INPUT HANDLER --------------------
   const handleInput = (e) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
-  // -------------------- SUBMIT HANDLER --------------------
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -93,7 +90,6 @@ const ManageDoctors = () => {
         fees,
       } = form;
 
-      // Validation
       if (
         !name ||
         !email ||
@@ -133,18 +129,14 @@ const ManageDoctors = () => {
         fees: Number(fees),
       };
 
-      // ADD OR EDIT MODE
       let response;
       if (editIndex !== null) {
-        // For edit, call your update API instead of addDoctor
-        // but since not shown, we just update locally for now
         const updatedList = [...doctors];
         updatedList[editIndex] = { ...doctors[editIndex], ...doctorData };
         setDoctors(updatedList);
         toast.success('Doctor updated successfully!');
         setLoading(false);
       } else {
-        // ADD NEW DOCTOR
         response = await addDoctor(doctorData);
         if (!response?.success) {
           toast.error(response?.error || 'Failed to add doctor');
@@ -152,14 +144,12 @@ const ManageDoctors = () => {
           return;
         }
 
-        // ✅ Backend returns newly added doctor → push instantly
         const newDoctor = response?.doctor;
         setDoctors((prev) => [...prev, newDoctor]);
         toast.success('Doctor added successfully!');
         setLoading(false);
       }
 
-      // RESET FORM & CLOSE MODAL
       setForm({
         name: '',
         email: '',
@@ -242,7 +232,6 @@ const ManageDoctors = () => {
     }
   };
 
-  // -------------------- DELETE HANDLER --------------------
   const handleDelete = async (id, index) => {
     if (confirm('Are you sure you want to delete this doctor?')) {
       try {
@@ -257,7 +246,6 @@ const ManageDoctors = () => {
     }
   };
 
-  // -------------------- FILTER DOCTORS --------------------
   const filteredDoctors = useMemo(() => {
     return doctors.filter(
       (d) =>
@@ -268,7 +256,6 @@ const ManageDoctors = () => {
 
   return (
     <div className='space-y-8'>
-      {/* ---------- Header ---------- */}
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
@@ -305,7 +292,6 @@ const ManageDoctors = () => {
         </Button>
       </motion.div>
 
-      {/* ---------- Search Filter ---------- */}
       <div className='flex items-center gap-2'>
         <div className='relative w-full max-w-md'>
           <Search className='absolute left-3 top-3 text-gray-400 w-4 h-4' />
@@ -318,7 +304,6 @@ const ManageDoctors = () => {
         </div>
       </div>
 
-      {/* ---------- Doctor List ---------- */}
       <Card className='p-6 bg-[#101614] border border-emerald-500/10 rounded-2xl space-y-4'>
         <h2 className='text-lg font-semibold text-white'>Doctor List</h2>
 
@@ -400,7 +385,6 @@ const ManageDoctors = () => {
         </div>
       </Card>
 
-      {/* ---------- Modal (Add/Edit Doctor) ---------- */}
       <Dialog
         open={openModal}
         onOpenChange={setOpenModal}
@@ -428,13 +412,17 @@ const ManageDoctors = () => {
               value={form.email}
               onChange={handleInput}
             />
-            <Input
-              name='password'
-              type='password'
-              placeholder='Password'
-              value={form.password}
-              onChange={handleInput}
-            />
+
+            {editIndex === null && (
+              <Input
+                name='password'
+                type='password'
+                placeholder='Password'
+                value={form.password}
+                onChange={handleInput}
+              />
+            )}
+
             <Input
               name='specialization'
               placeholder='Specialization'
@@ -457,12 +445,6 @@ const ManageDoctors = () => {
               name='bio'
               placeholder='Short Bio'
               value={form.bio}
-              onChange={handleInput}
-            />
-            <Input
-              name='profilePic'
-              placeholder='Profile Picture URL'
-              value={form.profilePic}
               onChange={handleInput}
             />
             <Input

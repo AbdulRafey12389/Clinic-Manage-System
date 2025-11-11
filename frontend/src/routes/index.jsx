@@ -1,19 +1,14 @@
-// NODE MODULES...
 import { createBrowserRouter } from 'react-router-dom';
 
-// LAYOUTS...
 import PatientDashboardLayout from '@/layout/PatientDashboardLayout';
 import DoctorDashboardLayout from '@/layout/DoctorDashboardLayout';
 import AdminDashboardLayout from '@/layout/AdminDashboardLayout';
 
-// LANDING PAGE
 import App from '@/App';
 
-// REGISTER AND LOGIN PAGES...
 import Login from '@/pages/auth/Login';
 import Register from '@/pages/auth/Register';
 
-// PATIENT PAGES...
 import Home from '@/pages/patients/Home';
 import BookAppointment from '@/pages/patients/BookAppoiment';
 import CaseHistory from '@/pages/patients/CaseHistory';
@@ -22,19 +17,16 @@ import Profile from '@/pages/patients/Profile';
 import AppointmentDetail from '@/pages/patients/ApoimentDetail';
 import DoctorList from '@/pages/patients/DoctorList';
 
-// DOCTOR PAGES...
 import DoctorDashboard from '@/pages/doctors/DoctorDashboard';
 import DoctorAppointments from '@/pages/doctors/DocotorAppoinment';
 import DoctorCaseRecords from '@/pages/doctors/DoctorCaseRecord';
 import DoctorProfile from '@/pages/doctors/DoctorProfile';
 
-// ADMIN PAGES...
 import AdminDashboard from '@/pages/Admin/AdminDashboard';
 import AdminManageDoctor from '@/pages/Admin/AminManageDoctor';
 import AdminManagePatient from '@/pages/Admin/AdminManagePatient';
 import AdminManageRoom from '@/pages/Admin/AdminManageRoom';
 
-// ACTION FUNCTION FOR AUTH...
 import registerAction from '@/routes/authActions/registerFunction';
 import loginAction from '@/routes/authActions/loginFunction';
 

@@ -1,25 +1,32 @@
-// controllers/patient/getAvailableDoctors.controller.js
 import Doctor from "../../models/doctor.js";
 import Appointment from "../../models/appointment.js";
 import { generateTimeSlots } from "../../utils/generateSlots.js";
 import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat.js";
+
+dayjs.extend(customParseFormat);
 
 export const getAvailableDoctors = async (req, res) => {
   try {
-    // 1️⃣ Current day and date
     const currentDate = dayjs().format("YYYY-MM-DD");
-    const currentDay = dayjs().format("dddd").toLowerCase(); // e.g. "monday"
-    const currentTime = dayjs(); // now
+    const currentDay = dayjs().format("dddd").toLowerCase();
+    const now = dayjs();
 
-    // 2️⃣ Get all doctors working today
-    const doctors = await Doctor.find({ workingDays: currentDay })
+    const allDoctors = await Doctor.find({ status: "active" })
       .populate({
         path: "_id",
-        select: "name email role",
+        select: "name email",
       })
       .lean();
 
-    if (!doctors.length) {
+    const doctorsWorkingToday = allDoctors.filter((doc) => {
+      if (!doc.workingDays || !Array.isArray(doc.workingDays)) return false;
+      return doc.workingDays.some(
+        (day) => day.toLowerCase().trim() === currentDay
+      );
+    });
+
+    if (!doctorsWorkingToday.length) {
       return res.status(200).json({
         success: true,
         message: `No doctors available today (${currentDay})`,
@@ -27,63 +34,77 @@ export const getAvailableDoctors = async (req, res) => {
       });
     }
 
-    // 3️⃣ Get booked appointments for today
     const bookedAppointments = await Appointment.find({
       date: currentDate,
       status: { $in: ["Pending", "Approved"] },
     }).select("doctor timeSlot");
 
-    // doctorId → bookedSlots[]
     const bookedMap = {};
     bookedAppointments.forEach((a) => {
       const dId = a.doctor.toString();
       if (!bookedMap[dId]) bookedMap[dId] = [];
-      bookedMap[dId].push(a.timeSlot);
+      const normalizedSlot = a.timeSlot.trim();
+      bookedMap[dId].push(normalizedSlot);
     });
 
-    // 4️⃣ Build today's available doctors with filtered slots
-    const availableDoctors = doctors
-      .map((doc) => {
-        const todaySchedule = doc.schedule.find(
-          (s) => s.day.toLowerCase() === currentDay
+    const availableDoctors = [];
+
+    for (const doc of doctorsWorkingToday) {
+      if (!doc._id) continue;
+
+      const todaySchedule = doc.schedule?.find(
+        (s) => s?.day?.toLowerCase().trim() === currentDay
+      );
+
+      if (!todaySchedule || !todaySchedule.from || !todaySchedule.to) {
+        continue;
+      }
+
+      const allSlots = generateTimeSlots(
+        todaySchedule.from,
+        todaySchedule.to,
+        todaySchedule.slotDurationMinutes || 30
+      );
+
+      if (!allSlots.length) continue;
+
+      const doctorId = doc._id._id?.toString() || doc._id.toString();
+      const bookedSlots = bookedMap[doctorId] || [];
+
+      const availableSlots = allSlots.filter((slot) => {
+        const normalizedSlot = slot.trim();
+        const [startTimeStr] = normalizedSlot.split(" - ").map((s) => s.trim());
+        
+        const slotDateTime = dayjs(`${currentDate} ${startTimeStr}`, "YYYY-MM-DD hh:mm A");
+        
+        if (!slotDateTime.isValid()) {
+          return false;
+        }
+
+        const isPast = slotDateTime.isBefore(now, "minute");
+        
+        const isBooked = bookedSlots.some(
+          (booked) => booked.trim() === normalizedSlot
         );
-        if (!todaySchedule) return null;
 
-        // 5️⃣ Generate all slots
-        const allSlots = generateTimeSlots(
-          todaySchedule.from,
-          todaySchedule.to,
-          todaySchedule.slotDurationMinutes
-        );
+        return !isPast && !isBooked;
+      });
 
-        // 6️⃣ Filter out booked & past slots
-        const booked = bookedMap[doc._id._id?.toString()] || [];
-        const availableSlots = allSlots.filter((slot) => {
-          const [startTime] = slot.split(" - ");
-          const slotStart = dayjs(startTime, "hh:mm A");
+      if (availableSlots.length === 0) continue;
 
-          const isPast = slotStart.isBefore(currentTime);
-          const isBooked = booked.includes(slot);
+      availableDoctors.push({
+        doctorId: doctorId,
+        name: doc._id.name || "",
+        email: doc._id.email || "",
+        specialization: doc.specialization || "",
+        experience: doc.experience || "",
+        roomIds: todaySchedule.roomIds || [],
+        availableSlots: availableSlots,
+        todayTiming: `${todaySchedule.from} - ${todaySchedule.to}`,
+        slotDuration: todaySchedule.slotDurationMinutes || 30,
+      });
+    }
 
-          return !isPast && !isBooked;
-        });
-
-        // 7️⃣ Return doctor info + available slots
-        return {
-          doctorId: doc._id._id,
-          name: doc._id.name,
-          email: doc._id.email,
-          specialization: doc.specialization,
-          experience: doc.experience,
-          roomIds: todaySchedule.roomIds || [],
-          availableSlots,
-          todayTiming: `${todaySchedule.from} - ${todaySchedule.to}`,
-          slotDuration: todaySchedule.slotDurationMinutes,
-        };
-      })
-      .filter(Boolean); // remove null
-
-    // ✅ Final Response
     return res.status(200).json({
       success: true,
       message: "Today's available doctors fetched successfully",

@@ -1,6 +1,5 @@
 import Room from "../../models/room.js";
 
-// ===================== CREATE ROOM =====================
 export const createRoom = async (req, res) => {
   try {
     const { roomNumber, type, capacity, status, notes } = req.body;
@@ -30,12 +29,10 @@ export const createRoom = async (req, res) => {
   }
 };
 
-// ===================== GET ALL ROOMS =====================
 export const getAllRooms = async (req, res) => {
   try {
     const { type, status } = req.query;
 
-    // filters (optional)
     const filter = {};
     if (type) filter.type = type;
     if (status) filter.status = status;
@@ -53,7 +50,6 @@ export const getAllRooms = async (req, res) => {
   }
 };
 
-// ===================== UPDATE ROOM =====================
 export const updateRoom = async (req, res) => {
   try {
     const { id } = req.params;
@@ -79,7 +75,6 @@ export const updateRoom = async (req, res) => {
   }
 };
 
-// ===================== DELETE ROOM =====================
 export const deleteRoom = async (req, res) => {
   try {
     const { id } = req.params;

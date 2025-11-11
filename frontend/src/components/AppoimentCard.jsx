@@ -15,7 +15,6 @@ const AppointmentCard = ({ appointment, doctorName = null }) => {
                  bg-[#0b0f0e]/90 border border-emerald-500/10
                  hover:border-emerald-500/30 hover:shadow-[0_0_10px_rgba(16,185,129,0.1)]'
     >
-      {/* Top Section */}
       <div className='flex items-start justify-between gap-4'>
         <div>
           <h4 className='font-semibold text-lg text-white capitalize'>
@@ -37,7 +36,6 @@ const AppointmentCard = ({ appointment, doctorName = null }) => {
         </div>
       </div>
 
-      {/* Appointment Info */}
       <div className='mt-4 flex flex-wrap gap-4 text-sm text-gray-400'>
         <div className='flex items-center gap-2'>
           <Calendar

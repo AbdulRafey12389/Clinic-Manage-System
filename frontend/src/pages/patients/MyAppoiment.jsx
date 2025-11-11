@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Calendar, Clock, User, XCircle, Sun } from 'lucide-react';
 import axios from 'axios';
-import { getMyAppointment } from '@/api/pateint';
+import { getMyAppointment, updateCancelAppointment } from '@/api/pateint';
 
 export default function MyAppointments() {
   const [tab, setTab] = useState('waiting');
@@ -15,7 +15,6 @@ export default function MyAppointments() {
     cancelled: [],
   });
 
-  // ✅ Fetch appointments
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
@@ -36,11 +35,9 @@ export default function MyAppointments() {
 
   const filtered = data[tab];
 
-  console.log(filtered);
-
   const handleCancel = async (id) => {
     try {
-      await axios.patch(`/api/appointments/${id}/cancel`);
+      await updateCancelAppointment(id)
       setData((prev) => ({
         ...prev,
         waiting: prev.waiting.filter((a) => a._id !== id),
@@ -68,7 +65,6 @@ export default function MyAppointments() {
         </p>
       </div>
 
-      {/* ✅ Tabs */}
       <Tabs
         value={tab}
         onValueChange={setTab}
@@ -95,7 +91,6 @@ export default function MyAppointments() {
           ))}
         </TabsList>
 
-        {/* ✅ Appointment Cards */}
         <TabsContent
           value={tab}
           className='mt-6 space-y-4'
@@ -121,7 +116,6 @@ export default function MyAppointments() {
                   }`}
                 >
                   <div className='flex flex-col sm:flex-row sm:items-center justify-between gap-4'>
-                    {/* Left section */}
                     <div>
                       <h3 className='text-lg font-semibold text-white'>
                         {a?.doctorName || 'Dr. Unknown'}
@@ -150,7 +144,6 @@ export default function MyAppointments() {
                       </div>
                     </div>
 
-                    {/* Right section */}
                     <div className='flex flex-col items-end gap-2'>
                       <span
                         className={`px-3 py-1 rounded-full text-xs font-semibold tracking-wide ${

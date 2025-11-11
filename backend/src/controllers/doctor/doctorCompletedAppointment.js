@@ -1,4 +1,3 @@
-
 import Appointment from "../../models/appointment.js";
 
 export const getCompletedAppointments = async (req, res) => {
@@ -8,9 +7,9 @@ export const getCompletedAppointments = async (req, res) => {
       doctor: doctorId,
       status: "Completed",
     })
-      .populate("patient", "name email age gender phone address") 
+      .populate("patient", "name email age gender phone address")
       .populate("room", "roomNumber type status")
-      .sort({ date: -1, timeSlot: 1 }); 
+      .sort({ date: -1, timeSlot: 1 });
 
     res.status(200).json({
       success: true,

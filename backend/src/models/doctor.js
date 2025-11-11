@@ -3,7 +3,7 @@ const { Schema, model, Types } = mongoose;
 
 const scheduleSlotSchema = new Schema(
   {
-    day: { type: String, required: true }, // e.g., "Monday"
+    day: { type: String, required: true },
     from: { type: String, required: true },
     to: { type: String, required: true },
     slotDurationMinutes: { type: Number, default: 30 },

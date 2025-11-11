@@ -1,6 +1,5 @@
 import User from "../../models/user.js";
 
-// ====================== ADMIN GET ALL PATIENTS (ONLY ROLE: 'patient') ======================
 export const getAllPatients = async (req, res) => {
   try {
     const patients = await User.find({ role: "patient" })

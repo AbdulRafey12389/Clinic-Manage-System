@@ -11,11 +11,10 @@ const getAdminOverview = async (req, res) => {
     const totalAppointments = await Appointment.countDocuments();
 
     const recentDoctors = await Doctor.find()
-      .populate("_id", "name email") // from User schema
+      .populate("_id", "name email")
       .sort({ createdAt: -1 })
       .limit(4);
 
-    // APPOINTMENT CHART DATA (Grouped by Status)
     const appointmentStats = await Appointment.aggregate([
       {
         $group: {
@@ -25,7 +24,6 @@ const getAdminOverview = async (req, res) => {
       },
     ]);
 
-    // FORMAT CHART DATA
     const chartData = {
       pending: 0,
       confirmed: 0,

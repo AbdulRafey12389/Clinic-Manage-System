@@ -1,7 +1,5 @@
-// NODE MODULES...
 import { Router } from "express";
 
-// CONTROLLER...
 import { getAvailableDoctors } from "../controllers/patient/availableDoctor.js";
 import { getAvailableRooms } from "../controllers/patient/getAvailableRoom.js";
 import { bookAppoinment } from "../controllers/patient/bookAppoinment.js";
@@ -10,11 +8,11 @@ import { getMyCaseHistory } from "../controllers/patient/getCaseHistory.js";
 import { downloadCaseHistoryPdf } from "../controllers/patient/downloadPdf.js";
 import { getPatientOverview } from "../controllers/patient/overview.js";
 
-// MIDDLEWARES...
 import authentication from "../middlewares/authentication.js";
 import authorization from "../middlewares/authorization.js";
 import { updateProfile } from "../controllers/patient/updateProfile.js";
 import upload from "../middlewares/upload.js";
+import { cancelAppointment } from "../controllers/patient/cancelAppointment.js";
 
 const router = Router();
 
@@ -72,6 +70,13 @@ router.post(
   authorization("patient"),
   upload.single("image"),
   updateProfile
+);
+
+router.patch(
+  "/cancel-appointment/:appointmentId",
+  authentication,
+  authorization("patient"),
+  cancelAppointment
 );
 
 export default router;

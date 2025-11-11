@@ -29,7 +29,6 @@ const Register = () => {
   const actionData = useActionData();
   const navigation = useNavigation();
   const [error, setError] = useState(null);
-  // const navigate = useNavigate();
 
   useEffect(() => {
     if (actionData) {
@@ -76,7 +75,6 @@ const Register = () => {
               method='POST'
               className='space-y-5'
             >
-              {/* Full Name */}
               <div className='space-y-2'>
                 <Label
                   htmlFor='fullname'
@@ -97,7 +95,6 @@ const Register = () => {
                 </div>
               </div>
 
-              {/* Email */}
               <div className='space-y-2'>
                 <Label
                   htmlFor='email'
@@ -118,7 +115,6 @@ const Register = () => {
                 </div>
               </div>
 
-              {/* Password */}
               <div className='space-y-2'>
                 <Label
                   htmlFor='password'
@@ -146,7 +142,6 @@ const Register = () => {
                 </div>
               </div>
 
-              {/* Confirm Password */}
               <div className='space-y-2'>
                 <Label
                   htmlFor='confirmPassword'
@@ -174,7 +169,6 @@ const Register = () => {
                 </div>
               </div>
 
-              {/* Submit Button */}
               <Button
                 type='submit'
                 className='w-full py-2 text-base font-medium bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl transition-colors'
@@ -187,7 +181,6 @@ const Register = () => {
                 )}
               </Button>
 
-              {/* Footer */}
               <p className='text-center text-sm text-muted-foreground'>
                 Already have an account?{' '}
                 <a

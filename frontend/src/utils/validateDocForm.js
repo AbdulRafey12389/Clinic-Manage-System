@@ -1,5 +1,3 @@
-// src/utils/validateDoctorForm.js
-
 export const validateDoctorForm = (form, isEdit = false) => {
   const errors = [];
 
@@ -11,7 +9,6 @@ export const validateDoctorForm = (form, isEdit = false) => {
     experience,
     degrees,
     bio,
-    profilePic,
     workingDays,
     day,
     from,
@@ -79,14 +76,6 @@ export const validateDoctorForm = (form, isEdit = false) => {
 
   if (!fees || fees <= 0)
     errors.push('Consultation fee must be greater than 0');
-
-  if (
-    profilePic &&
-    !/^https?:\/\/[^\s]+\.(jpg|jpeg|png|webp)$/i.test(profilePic)
-  )
-    errors.push(
-      'Profile picture must be a valid image URL ending with jpg/png/webp',
-    );
 
   return errors;
 };

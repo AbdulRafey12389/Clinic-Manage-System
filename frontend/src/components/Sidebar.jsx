@@ -18,7 +18,6 @@ import {
 const Sidebar = ({ role = 'patient' }) => {
   const { pathname } = useLocation();
 
-  // 🔹 Define role-based navigation
   const navItems = {
     patient: [
       { to: '/patient/dashboard', label: 'Overview', icon: LayoutDashboard },
@@ -78,7 +77,6 @@ const Sidebar = ({ role = 'patient' }) => {
 
   return (
     <aside className='w-72 min-h-screen bg-[#101614] backdrop-blur-xl border-r border-emerald-600/20 flex flex-col justify-between py-6 px-5 transition-all duration-300'>
-      {/* ---------- Top Branding ---------- */}
       <div>
         <div className='flex items-center gap-3 mb-10'>
           <div className='bg-gradient-to-br from-emerald-500/30 to-teal-500/10 p-3 rounded-xl'>
@@ -90,7 +88,6 @@ const Sidebar = ({ role = 'patient' }) => {
           </div>
         </div>
 
-        {/* ---------- Navigation Links ---------- */}
         <nav className='flex flex-col gap-1'>
           {items.map((item) => {
             const isActive = pathname === item.to;
@@ -123,7 +120,6 @@ const Sidebar = ({ role = 'patient' }) => {
         </nav>
       </div>
 
-      {/* ---------- Logout Button ---------- */}
       <button
         onClick={handlelogout}
         className='flex items-center gap-2 text-gray-400 hover:text-red-400 mt-auto px-4 py-2 rounded-xl transition-all'

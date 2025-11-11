@@ -66,7 +66,6 @@ const Login = () => {
               action='/login'
               className='space-y-5'
             >
-              {/* Email */}
               <div className='space-y-2'>
                 <Label
                   htmlFor='email'
@@ -87,7 +86,6 @@ const Login = () => {
                 </div>
               </div>
 
-              {/* Password */}
               <div className='space-y-2'>
                 <Label
                   htmlFor='password'
@@ -108,7 +106,6 @@ const Login = () => {
                 </div>
               </div>
 
-              {/* Role Selector */}
               <div className='space-y-2'>
                 <Label className='text-sm text-muted-foreground flex items-center gap-1'>
                   <UserRound className='h-4 w-4' /> Select Role
@@ -136,7 +133,6 @@ const Login = () => {
                 </Select>
               </div>
 
-              {/* Submit Button */}
               <Button
                 type='submit'
                 className='w-full py-2 text-base font-medium bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl transition-colors'

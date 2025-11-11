@@ -66,7 +66,6 @@ export default function ProfilePage() {
           onSubmit={handleSubmit}
           className='space-y-6'
         >
-          {/* Profile Image */}
           <div className='flex flex-col items-center gap-3'>
             <div className='relative'>
               {preview || user.imageUrl ? (
@@ -98,7 +97,6 @@ export default function ProfilePage() {
             <p className='text-sm text-gray-400'>Upload your profile picture</p>
           </div>
 
-          {/* Form Fields */}
           <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
             <div>
               <Label
@@ -171,7 +169,6 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          {/* Buttons */}
           <div className='flex gap-3 pt-4'>
             <Button
               type='submit'

@@ -1,6 +1,5 @@
 import { Router } from "express";
 
-// ROUTES...
 import authRoutes from "./auth.js";
 import adminRoutes from "./admin.js";
 import patientRoutes from "./patient.js";

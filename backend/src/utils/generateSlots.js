@@ -6,11 +6,9 @@ dayjs.extend(customParseFormat);
 export const generateTimeSlots = (from, to, durationMinutes) => {
   const slots = [];
 
-  // Convert times using proper AM/PM parsing
   let start = dayjs(from, "hh:mm A");
   const end = dayjs(to, "hh:mm A");
 
-  // Safety check: agar parse na ho to console karo
   if (!start.isValid() || !end.isValid()) {
     console.log("⛔ Invalid time format:", from, to);
     return [];
@@ -20,7 +18,6 @@ export const generateTimeSlots = (from, to, durationMinutes) => {
     const slotStart = start.format("hh:mm A");
     const slotEnd = start.add(durationMinutes, "minute").format("hh:mm A");
 
-    // ensure slotEnd doesn’t exceed ‘to’
     if (dayjs(slotEnd, "hh:mm A").isAfter(end)) break;
 
     slots.push(`${slotStart} - ${slotEnd}`);

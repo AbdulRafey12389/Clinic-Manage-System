@@ -18,7 +18,6 @@ const AdminDashboard = () => {
   const [chartData, setChartData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // 🔹 FETCH DASHBOARD DATA ON LOAD
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -78,7 +77,6 @@ const AdminDashboard = () => {
 
   return (
     <div className='space-y-8'>
-      {/* ---------- Header ---------- */}
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
@@ -91,7 +89,6 @@ const AdminDashboard = () => {
         <p className='text-sm text-gray-400'>Welcome back, Admin 👋</p>
       </motion.div>
 
-      {/* ---------- Stats ---------- */}
       <div className='grid sm:grid-cols-2 lg:grid-cols-4 gap-5'>
         {stats.map((item, i) => {
           const Icon = item.icon;
@@ -114,7 +111,6 @@ const AdminDashboard = () => {
         })}
       </div>
 
-      {/* ---------- Charts / Analytics ---------- */}
       <Card className='p-6 bg-[#101614] border border-emerald-500/10 rounded-2xl'>
         <h2 className='text-lg font-semibold mb-4 text-white'>
           Appointments Overview
@@ -122,7 +118,6 @@ const AdminDashboard = () => {
         <VisitsChart data={chartData} />
       </Card>
 
-      {/* ---------- Recently Added Doctors ---------- */}
       <Card className='p-6 bg-[#101614] border border-emerald-500/10 rounded-2xl space-y-4'>
         <div className='flex items-center justify-between'>
           <h2 className='text-lg font-semibold text-white'>

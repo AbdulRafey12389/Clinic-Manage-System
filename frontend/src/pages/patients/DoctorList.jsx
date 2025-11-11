@@ -79,7 +79,6 @@ const DoctorCard = ({ doctor, onBook }) => {
   return (
     <Card className='p-5 rounded-2xl bg-[#101614]/90 border border-emerald-500/10 hover:border-emerald-500/30 hover:shadow-[0_0_10px_rgba(16,185,129,0.1)] transition-all'>
       <div className='flex items-center gap-4'>
-        {/* Profile Pic */}
         {doctor?.profilePic ? (
           <img
             src={doctor?.profilePic}
@@ -118,7 +117,6 @@ const DoctorCard = ({ doctor, onBook }) => {
             </div>
           </div>
 
-          {/* Available Slots */}
           <div className='flex flex-wrap gap-2'>
             {availableSlots?.slice(0, 4).map((slot, i) => (
               <span
@@ -133,7 +131,6 @@ const DoctorCard = ({ doctor, onBook }) => {
             )}
           </div>
 
-          {/* Book Appointment Button */}
           <Button
             onClick={() => onBook(doctor)}
             className='mt-4 bg-emerald-500 hover:bg-emerald-600 text-white text-sm'
@@ -145,106 +142,3 @@ const DoctorCard = ({ doctor, onBook }) => {
     </Card>
   );
 };
-
-// import React from 'react';
-// import { Users, Calendar, Clock } from 'lucide-react';
-// import { Card } from '@/components/ui/card';
-// import { useNavigate } from 'react-router-dom';
-
-// const DoctorCard = ({ doctor }) => {
-//   const navigate = useNavigate();
-
-//   const handleBook = () => {
-//     // Navigate to book-appointment page with doctor data
-//     navigate('/patient/book-appointment', { state: { doctor } });
-//   };
-
-//   return (
-//     <Card className='p-5 rounded-2xl bg-[#101614]/90 border border-emerald-500/10 hover:border-emerald-500/30 hover:shadow-[0_0_10px_rgba(16,185,129,0.1)] transition-all'>
-//       <div className='flex items-center gap-4'>
-//         {/* Profile Pic */}
-//         {doctor.profilePic ? (
-//           <img
-//             src={doctor.profilePic}
-//             alt='Doctor'
-//             className='w-16 h-16 rounded-full object-cover border border-emerald-500/20'
-//           />
-//         ) : (
-//           <div className='w-16 h-16 rounded-full flex items-center justify-center bg-[#0b0f0e] border border-emerald-500/20'>
-//             <Users className='text-emerald-400 w-8 h-8' />
-//           </div>
-//         )}
-
-//         <div className='flex-1'>
-//           <h4 className='text-white font-semibold text-lg'>{doctor.name}</h4>
-//           <p className='text-gray-400 text-sm'>{doctor.specialization}</p>
-
-//           <div className='flex flex-wrap gap-3 mt-2 text-gray-400 text-xs'>
-//             <div className='flex items-center gap-1'>
-//               <Calendar
-//                 size={14}
-//                 className='text-emerald-400'
-//               />{' '}
-//               {doctor.workingDays.join(', ')}
-//             </div>
-//             <div className='flex items-center gap-1'>
-//               <Clock
-//                 size={14}
-//                 className='text-emerald-400'
-//               />{' '}
-//               {doctor.timing}
-//             </div>
-//           </div>
-
-//           {/* Book Appointment Button */}
-//           <button
-//             onClick={handleBook}
-//             className='mt-4 px-4 py-2 rounded-xl bg-emerald-500 text-white text-sm font-medium hover:bg-emerald-600 transition-all'
-//           >
-//             Book Appointment
-//           </button>
-//         </div>
-//       </div>
-//     </Card>
-//   );
-// };
-
-// export default function DoctorListPage() {
-//   const doctors = [
-//     {
-//       name: 'Dr. Sarah Khan',
-//       specialization: 'Cardiology',
-//       timing: '10:00 AM - 4:00 PM',
-//       workingDays: ['Mon', 'Wed', 'Fri'],
-//       profilePic: null,
-//     },
-//     {
-//       name: 'Dr. Ali Raza',
-//       specialization: 'Neurology',
-//       timing: '09:00 AM - 3:00 PM',
-//       workingDays: ['Tue', 'Thu', 'Sat'],
-//       profilePic: null,
-//     },
-//     {
-//       name: 'Dr. Fatima Noor',
-//       specialization: 'Pediatrics',
-//       timing: '11:00 AM - 5:00 PM',
-//       workingDays: ['Mon', 'Tue', 'Thu'],
-//       profilePic: null,
-//     },
-//   ];
-
-//   return (
-//     <div className='max-w-4xl mx-auto space-y-6 py-6'>
-//       <h1 className='text-2xl font-semibold text-white'>Available Doctors</h1>
-//       <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
-//         {doctors.map((doc, idx) => (
-//           <DoctorCard
-//             key={idx}
-//             doctor={doc}
-//           />
-//         ))}
-//       </div>
-//     </div>
-//   );
-// }

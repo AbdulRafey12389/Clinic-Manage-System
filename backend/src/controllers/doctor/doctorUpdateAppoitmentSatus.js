@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 export const updateAppointmentStatus = async (req, res) => {
   try {
-    const doctorId = req.user._id; // logged-in doctor
+    const doctorId = req.user._id;
     const { appointmentId } = req.params;
     console.log(appointmentId);
     const { status } = req.body;

@@ -16,7 +16,6 @@ import {
 } from 'lucide-react';
 
 export default function AppointmentDetail() {
-  // 🔹 Dummy appointment data
   const [appointment, setAppointment] = useState({
     id: 'APT-001',
     date: '2025-11-10',
@@ -52,7 +51,6 @@ export default function AppointmentDetail() {
       </h1>
 
       <Card className='p-6 bg-[#101614] border border-emerald-500/10 rounded-2xl shadow-[0_0_15px_rgba(16,185,129,0.05)] space-y-6'>
-        {/* Doctor Info Section */}
         <div className='flex flex-col md:flex-row items-center md:items-start gap-6'>
           <div className='relative'>
             <img
@@ -85,10 +83,8 @@ export default function AppointmentDetail() {
           </div>
         </div>
 
-        {/* Divider */}
         <div className='h-px bg-emerald-500/10' />
 
-        {/* Appointment Info Section */}
         <div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-5'>
           <div className='flex items-center gap-3'>
             <Calendar
@@ -145,7 +141,6 @@ export default function AppointmentDetail() {
           </div>
         </div>
 
-        {/* Reason / Notes */}
         <div className='pt-4'>
           <p className='text-sm text-gray-400 mb-1'>Reason / Notes</p>
           <p className='text-white bg-[#0b0f0e] p-3 rounded-xl border border-emerald-500/10 text-sm'>
@@ -153,7 +148,6 @@ export default function AppointmentDetail() {
           </p>
         </div>
 
-        {/* Cancel Button */}
         {!cancelled && (
           <div className='pt-6 flex justify-end'>
             <Button

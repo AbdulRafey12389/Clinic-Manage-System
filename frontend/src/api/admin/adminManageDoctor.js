@@ -12,7 +12,6 @@ export async function addDoctor(formData) {
   }
 }
 
-// ✅ Get all doctors
 export async function getAllDoctors() {
   try {
     const response = await API.get('admin/get-doctor');
@@ -37,7 +36,6 @@ export async function editDoctor(id, updates) {
   }
 }
 
-// ✅ Delete doctor
 export async function deleteDoctor(id) {
   try {
     const response = await API.delete(`/admin/delete-doctor/${id}`);

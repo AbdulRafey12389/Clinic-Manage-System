@@ -18,7 +18,6 @@ const VisitsChart = ({ data }) => {
     );
   }
 
-  // ✅ Convert backend object to array format Recharts expects
   const chartArray = [
     { name: 'pending', value: data.pending || 0 },
     { name: 'Confirmed', value: data.confirmed || 0 },

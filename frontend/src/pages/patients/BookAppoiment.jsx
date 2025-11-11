@@ -34,7 +34,7 @@ export default function BookAppointment() {
   const [availableSlots, setAvailableSlots] = useState([]);
   const [availableRooms, setAvailableRooms] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [doctorName, setDoctorname] = useState('');
+  const [doctorName, setDoctorname] = useState(preselectedDoctor.name || '');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -99,7 +99,6 @@ export default function BookAppointment() {
     const doctorId = e.target.value;
     const selected = doctors.find((doc) => doc.doctorId === doctorId);
 
-    console.log(selected);
 
     setDoctorId(doctorId);
     setAvailableSlots(selected?.availableSlots || []);
@@ -127,7 +126,6 @@ export default function BookAppointment() {
             onSubmit={handleSubmit}
             className='grid grid-cols-1 md:grid-cols-2 gap-5'
           >
-            {/* Doctor Select */}
             <div>
               <label className='text-sm text-gray-400 flex items-center gap-2'>
                 <Stethoscope
@@ -155,9 +153,6 @@ export default function BookAppointment() {
               </select>
             </div>
 
-            {/* Day Select */}
-
-            {/* Date Picker */}
             <div>
               <label className='text-sm text-gray-400 flex items-center gap-2'>
                 <CalendarDays
@@ -174,7 +169,6 @@ export default function BookAppointment() {
               />
             </div>
 
-            {/* Slot Select */}
             <div>
               <label className='text-sm text-gray-400 flex items-center gap-2'>
                 <Clock
@@ -186,7 +180,6 @@ export default function BookAppointment() {
               <select
                 value={timeSlot}
                 onChange={(e) => setTimeSlot(e.target.value)}
-                // disabled={!availableSlots.length}
                 className='mt-2 w-full rounded-xl p-3 bg-[#0b0f0e]/90 border border-emerald-500/10 text-gray-300 focus:outline-none'
               >
                 <option value=''>Select Slot</option>
@@ -201,7 +194,6 @@ export default function BookAppointment() {
               </select>
             </div>
 
-            {/* Room Select */}
             <div>
               <label className='text-sm text-gray-400 flex items-center gap-2'>
                 <Building
@@ -228,7 +220,6 @@ export default function BookAppointment() {
               </select>
             </div>
 
-            {/* Reason */}
             <div className='md:col-span-2'>
               <label className='text-sm text-gray-400 flex items-center gap-2'>
                 <MessageSquare
@@ -246,7 +237,6 @@ export default function BookAppointment() {
               />
             </div>
 
-            {/* Buttons */}
             <div className='md:col-span-2 flex gap-4 pt-2'>
               <button
                 type='submit'

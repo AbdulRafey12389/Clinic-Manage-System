@@ -5,7 +5,6 @@ export const getMyCaseHistory = async (req, res) => {
   try {
     const patientId = req.user._id;
 
-    // Fetch all case histories for this patient
     const histories = await CaseHistory.find({ patient: patientId })
       .populate(
         "doctor",

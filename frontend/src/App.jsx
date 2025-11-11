@@ -14,7 +14,6 @@ import { Link } from 'react-router-dom';
 const App = () => {
   return (
     <div className='min-h-screen bg-gradient-to-br from-background via-background to-muted dark:from-[#0a0a0a] dark:to-[#121212] transition-all text-foreground'>
-      {/* Navbar */}
       <header className='flex items-center justify-between px-8 py-5 backdrop-blur-lg bg-card/60 border-b border-border/40 shadow-sm sticky top-0 z-50'>
         <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -51,7 +50,6 @@ const App = () => {
         </motion.nav>
       </header>
 
-      {/* Hero Section */}
       <section className='flex flex-col md:flex-row items-center justify-between px-8 md:px-16 lg:px-28 py-20 gap-10'>
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -98,7 +96,6 @@ const App = () => {
         </motion.div>
       </section>
 
-      {/* Features Section */}
       <section
         id='features'
         className='px-8 md:px-16 lg:px-28 py-16 bg-card/40 backdrop-blur-xl border-t border-border/40'
@@ -147,7 +144,6 @@ const App = () => {
         </div>
       </section>
 
-      {/* Footer */}
       <footer
         id='contact'
         className='px-8 py-8 text-center text-sm text-muted-foreground border-t border-border/40 bg-card/60 backdrop-blur-md'
