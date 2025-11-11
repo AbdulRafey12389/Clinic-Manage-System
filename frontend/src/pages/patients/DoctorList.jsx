@@ -20,7 +20,6 @@ export default function DoctorListPage() {
     const fetchDoctors = async () => {
       setLoading(true);
       const res = await getAvailableDoctors();
-      console.log(res);
 
       if (res.success) {
         setDoctors(res.data);

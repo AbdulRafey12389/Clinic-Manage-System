@@ -8,8 +8,6 @@ const API = axios.create({
       : import.meta.env.VITE_BACKEND_URL,
 });
 
-console.log(import.meta.env.VITE_NODE_ENV);
-
 API.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {

@@ -11,7 +11,6 @@ export default function ManagePatients() {
     const fetchPatients = async () => {
       try {
         const res = await getAllPatient();
-        console.log(res);
 
         setPatients(res?.patients || []);
       } catch (error) {

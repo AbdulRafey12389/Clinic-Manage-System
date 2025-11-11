@@ -20,7 +20,6 @@ const CaseHistoryWithAISummary = () => {
       try {
         setLoading(true);
         const res = await getMyCaseHistory();
-        console.log(res);
 
         if (res?.histories) {
           setCaseHistories(res.histories);

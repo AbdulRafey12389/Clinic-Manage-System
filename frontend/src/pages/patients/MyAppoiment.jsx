@@ -19,8 +19,6 @@ export default function MyAppointments() {
     const fetchAppointments = async () => {
       try {
         const res = await getMyAppointment();
-        console.log(res.waiting);
-
         setData({
           waiting: res.waiting,
           completed: res.completed,
@@ -37,7 +35,7 @@ export default function MyAppointments() {
 
   const handleCancel = async (id) => {
     try {
-      await updateCancelAppointment(id)
+      await updateCancelAppointment(id);
       setData((prev) => ({
         ...prev,
         waiting: prev.waiting.filter((a) => a._id !== id),

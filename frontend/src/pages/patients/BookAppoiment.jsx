@@ -204,7 +204,7 @@ export default function BookAppointment() {
               <select
                 value={room}
                 onChange={(e) => setRoom(e.target.value)}
-                disabled={!availableRooms.length}
+                disabled={!availableRooms?.length}
                 className='mt-2 w-full rounded-xl p-3 bg-[#0b0f0e]/90 border border-emerald-500/10 text-gray-300 focus:outline-none'
               >
                 <option value=''>

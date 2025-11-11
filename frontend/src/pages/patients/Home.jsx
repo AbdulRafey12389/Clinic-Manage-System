@@ -20,8 +20,6 @@ export default function Home() {
         setLoading(true);
         const res = await getPatientOverview();
 
-        console.log(res);
-
         if (res?.success) {
           const data = res.data;
 
@@ -39,8 +37,6 @@ export default function Home() {
 
     fetchOverview();
   }, []);
-
-  console.log(pendingAppointments);
 
   if (loading) {
     return (
