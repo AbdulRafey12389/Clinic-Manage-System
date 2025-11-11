@@ -83,7 +83,7 @@ const Sidebar = ({ role = 'patient' }) => {
             <Stethoscope className='h-6 w-6 text-emerald-400' />
           </div>
           <div>
-            <h3 className='text-lg font-semibold text-white'>MediCare</h3>
+            <h3 className='text-lg font-semibold text-white'>HealthCare</h3>
             <p className='text-xs text-gray-400 capitalize'>{role} panel</p>
           </div>
         </div>
