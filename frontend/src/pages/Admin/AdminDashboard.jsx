@@ -139,7 +139,7 @@ const AdminDashboard = () => {
                 className='p-4 flex items-center justify-between bg-[#101614]/90 border border-emerald-500/10 rounded-2xl'
               >
                 <div>
-                  <p className='text-white font-medium'>{doc._id.name}</p>
+                  <p className='text-white font-medium'>{doc?._id?.name}</p>
                   <p className='text-gray-400 text-sm'>
                     {doc.specialization || 'Not specified'}
                   </p>
